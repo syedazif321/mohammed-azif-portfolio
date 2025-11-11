@@ -1,4 +1,6 @@
-// src/projectData.js
+// This variable automatically gets the correct path (e.g., "/mohammed-azif-portfolio")
+const publicUrl = process.env.PUBLIC_URL;
+
 export const projects = [
   {
     id: "pick-o-place-sort", // URL-friendly ID
@@ -13,13 +15,14 @@ export const projects = [
       "<strong>Analytics & Data Logging:</strong> To analyze performance, I integrated a database (SQLite/PostgreSQL) to log critical analytics. This included simulation start time, detected box color/size, and high-precision timestamps for detection, pick, and place events, allowing for a full-cycle duration analysis."
     ],
     images: [
-      { src: "/media/project1/gui_operations.gif", alt: "GUI Operations" },
-      { src: "/media/project1/box_spawning.gif", alt: "Box Spawning" },
-      { src: "/media/project1/gui1.png", alt: "Pick-O-Place GUI 1", class: "img-contain" },
-      { src: "/media/project1/gui2.png", alt: "Pick-O-Place GUI 2", class: "img-contain" },
-      { src: "/media/project1/Data_base.png", alt: "Database Schema" }
+      { src: publicUrl + "/media/project1/gui_operations.gif", alt: "GUI Operations" },
+      { src: publicUrl + "/media/project1/box_spawning.gif", alt: "Box Spawning" },
+      { src: publicUrl + "/media/project1/gui1.png", alt: "Pick-O-Place GUI 1", class: "img-contain" },
+      { src: publicUrl + "/media/project1/gui2.png", alt: "Pick-O-Place GUI 2", class: "img-contain" },
+      // Your file 'Data_base.png' has a capital 'D', which is correct here.
+      { src: publicUrl + "/media/project1/Data_base.png", alt: "Database Schema" }
     ],
-    cardImage: "/media/project1/pipeline-execution.gif" // From projects.html
+    cardImage: publicUrl + "/media/project1/pipeline-execution.gif" // From projects.html
   },
   {
     id: "multi-floor-manipulator",
@@ -35,16 +38,21 @@ export const projects = [
        "<strong>Perception-Guided Manipulation:</strong> The robot used its vision pipeline to locate packages..."
     ],
     images: [
-      { src: "/media/project2/world.gif", alt: "Gazebo World" },
-      { src: "/media/project2/pipleine1.gif", alt: "Pipeline Demo" },
-      { src: "/media/project2/data_base.gif", alt: "Database Demo" },
-      { src: "/media/project2/robot model.png", alt: "Robot Model" },
-      { src: "/media/project2/top_view.png", alt: "Top View" },
-      { src: "/media/project2/data base1.png", alt: "Database Schema 1" },
-      { src: "/media/project2/data base2.png", alt: "Database Schema 2" },
-      { src: "/media/project2/data base3.png", alt: "Database Schema 3" }
+      { src: publicUrl + "/media/project2/world.gif", alt: "Gazebo World" },
+      // FIXED TYPO: pipleine1.gif -> pipeline1.gif
+      { src: publicUrl + "/media/project2/pipeline1.gif", alt: "Pipeline Demo" },
+      { src: publicUrl + "/media/project2/data_base.gif", alt: "Database Demo" },
+      // FIXED SPACES: 'robot model.png' -> 'robot_model.png'
+      { src: publicUrl + "/media/project2/robot_model.png", alt: "Robot Model" },
+      { src: publicUrl + "/media/project2/top_view.png", alt: "Top View" },
+      // FIXED SPACES: 'data base1.png' -> 'data_base1.png'
+      { src: publicUrl + "/media/project2/data_base1.png", alt: "Database Schema 1" },
+      // FIXED SPACES: 'data base2.png' -> 'data_base2.png'
+      { src: publicUrl + "/media/project2/data_base2.png", alt: "Database Schema 2" },
+      // FIXED SPACES: 'data base3.png' -> 'data_base3.png'
+      { src: publicUrl + "/media/project2/data_base3.png", alt: "Database Schema 3" }
     ],
-    cardImage: "/media/project2/main_execution.gif"
+    cardImage: publicUrl + "/media/project2/main_execution.gif"
   },
   {
     id: "dynamic-pick",
@@ -59,11 +67,13 @@ export const projects = [
       "<strong>Precision Grasp Logic:</strong> A grasp was only triggered when the system's calculations determined the box..."
     ],
     images: [
-      { src: "/media/project3/video2.gif", alt: "Dynamic Pick Demo 2" },
-      { src: "/media/project3/2.png", alt: "ArUco Tracking" },
-      { src: "/media/project3/3.png", alt: "System View" },
-      { src: "/media/project3/vidoe1.gif", alt: "Dynamic Pick Demo 1" }
+      { src: publicUrl + "/media/project3/video2.gif", alt: "Dynamic Pick Demo 2" },
+      { src: publicUrl + "/media/project3/2.png", alt: "ArUco Tracking" },
+      { src: publicUrl + "/media/project3/3.png", alt: "System View" },
+      // FIXED TYPO: vidoe1.gif -> video1.gif
+      { src: publicUrl + "/media/project3/video1.gif", alt: "Dynamic Pick Demo 1" }
     ],
-    cardImage: "/media/project3/vidoe1.gif"
+    // FIXED TYPO: vidoe1.gif -> video1.gif
+    cardImage: publicUrl + "/media/project3/video1.gif"
   }
 ];

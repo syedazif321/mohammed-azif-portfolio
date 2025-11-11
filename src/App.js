@@ -1,5 +1,7 @@
 // src/App.js
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+// 1. We change 'BrowserRouter' to 'HashRouter' and give it an alias 'Router'
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import React from 'react';
 // Import our global stylesheet
 import './style.css'; 
@@ -12,7 +14,8 @@ import ProjectPage from './components/ProjectPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    // 2. We use <Router> (which is our HashRouter) instead of <BrowserRouter>
+    <Router>
       {/* FluidCanvas is outside <Routes>, so it shows on ALL pages */}
       <FluidCanvas />
       
@@ -35,7 +38,7 @@ function App() {
           </main>
         } />
       </Routes>
-    </BrowserRouter>
+    </Router> // 3. Make sure this closing tag matches
   );
 }
 

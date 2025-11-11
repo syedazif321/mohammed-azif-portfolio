@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Use Link for internal pages
 
+// This variable automatically gets the correct path (e.g., "/" or "/mohammed-azif-portfolio")
+const publicUrl = process.env.PUBLIC_URL;
+
 const HomePage = () => {
   return (
     <main className="portfolio-container" id="home">
       {/* Paths are from the 'public' folder */}
-      <img src="/media/azif.png" alt="My Avatar" className="avatar" />
+      {/* Corrected path for avatar */}
+      <img src={publicUrl + "/media/azif.png"} alt="My Avatar" className="avatar" />
 
       <header>
         <h1>Hey, I'm Mohammed Azif👋</h1>
@@ -33,7 +37,8 @@ const HomePage = () => {
         </a>
       </nav>
 
-      <a href="/Mohammed_azif_resume_.pdf" className="btn-resume" download>
+      {/* Corrected path for resume */}
+      <a href={publicUrl + "/Mohammed_azif_resume_.pdf"} className="btn-resume" download>
         <i className="fa-solid fa-download"></i>
         Download Resume
       </a>
