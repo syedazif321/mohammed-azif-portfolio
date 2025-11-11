@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Projects</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css">
 </head>
 <body>
     <canvas id="fluid-canvas"></canvas>
@@ -22,44 +22,56 @@
         <div class="project-grid">
 
             <div class="project-card">
-                <img src="httpsforproject.jpg" alt="Project 1 Screenshot">
-                <h3>Autonomous Mobile Robot (AMR)</h3>
-                <p>A differential drive robot using ROS 2, Nav2 stack, and SLAM for autonomous warehouse navigation.</p>
+                <img src="media/project1/pipeline-execution.gif" alt="Pipeline Execution" class="project-card-image">
+                
+                <h3>Pick-O-Place Sort (Parol6)</h3>
+                <p>
+                    A complete C++ simulation of a Parol6 arm sorting boxes. Features custom Gazebo plugins for continuous conveyors, random box spawning, and a suction gripper.
+                </p>
+                <div class="project-tags">
+                    <span>ROS 2</span>
+                    <span>C++</span>
+                    <span>Gazebo Plugins</span>
+                    <span>MoveIt 2</span>
+                </div>
+                <a href="project1.html" class="btn-details">View Details</a>
+            </div>
+
+            <div class="project-card">
+                <img src="media/project2/main_execution.gif" alt="Main Execution" class="project-card-image">
+
+                <h3>Multi-Floor Mobile Manipulator</h3>
+                <p>
+                    Full simulation of an AMR with a 7-DoF arm in a two-floor world, featuring a working lift, multi-map navigation, and dynamic obstacle simulation.
+                </p>
                 <div class="project-tags">
                     <span>ROS 2</span>
                     <span>C++</span>
                     <span>Nav2</span>
-                    <span>SLAM</span>
+                    <span>Gazebo Plugins</span>
                 </div>
+                <a href="project2.html" class="btn-details">View Details</a>
             </div>
-
+            
             <div class="project-card">
-                <img src="httpsforproject.jpg" alt="Project 2 Screenshot">
-                <h3>Robotic Arm Simulation</h3>
-                <p>A 6-DOF manipulator arm simulated in Gazebo, controlled with MoveIt 2 for pick and place tasks.</p>
+                <img src="media/project3/vidoe1.gif" alt="Dynamic Pick Demo 1" class="project-card-image">
+
+                <h3>Dynamic Pick from Moving Conveyor</h3>
+                <p>
+                    Advanced simulation where an AMR and a conveyor are both in motion. The robot performs a dynamic grasp by estimating 6-DoF pose and relative velocity.
+                </p>
                 <div class="project-tags">
                     <span>ROS 2</span>
-                    <span>MoveIt</span>
-                    <span>Gazebo</span>
-                    <span>Python</span>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <img src="httpsforproject.jpg" alt="Project 3 Screenshot">
-                <h3>Computer Vision Object Detection</h3>
-                <p>Real-time object detection using OpenCV and a depth camera to identify and track items for a robot.</p>
-                <div class="project-tags">
-                    <span>Python</span>
-                    <span>OpenCV</span>
+                    <span>C++</span>
                     <span>Computer Vision</span>
+                    <span>ArUco</span>
                 </div>
+                <a href="project3.html" class="btn-details">View Details</a>
             </div>
             
-            </div>
+        </div>
     </main>
 
-   
     <script src="script.js"></script>
 </body>
 </html>

@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Mohammed Azif - Robotics Engineer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <canvas id="fluid-canvas"></canvas>
 
-    <main class="portfolio-container">
-        <img src="avatar.jpg" alt="My Avatar" class="avatar">
+    <main class="portfolio-container" id="home">
+        <img src="media/azif.png" alt="My Avatar" class="avatar">
 
         <header>
             <h1>Hey, I'm Mohammed Azif👋</h1>
-            <h2>My Portfolio</h2>
+            <h2>Robotics Engineer</h2>
         </header>
-
-        <div class="fake-search">
-            <span>Ask me anything...</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
 
         <nav>
             <a href="#me">
                 <i class="fa-solid fa-user"></i>
-                <span>Me</span>
+                <span>About Me</span>
             </a>
             <a href="projects.html">
                 <i class="fa-solid fa-briefcase"></i>
@@ -36,17 +31,63 @@
                 <i class="fa-solid fa-laptop-code"></i>
                 <span>Skills</span>
             </a>
-            <a href="#fun">
-                <i class="fa-solid fa-gamepad"></i>
-                <span>Fun</span>
-            </a>
             <a href="#contact">
                 <i class="fa-solid fa-envelope"></i>
                 <span>Contact</span>
             </a>
         </nav>
+
+        <a href="Mohammed_azif_resume_.pdf" class="btn-resume" download>
+            <i class="fa-solid fa-download"></i>
+            Download Resume
+        </a>
     </main>
 
-    <script src="script.js"></script>
-</body>
+    <section id="me" class="content-section">
+        <h2>About Me</h2>
+        <p>
+            I am a Robotics Engineer with a B.Tech in Mechatronics Engineering from APJ Abdul Kalam Technological University[cite: 5, 6].
+            I specialize in the ROS 2 (Humble) ecosystem [cite: 15], motion planning with MoveIt 2[cite: 20], and developing full software stacks
+            for both mobile robots (AMRs) and 6-DOF manipulator arms[cite: 14, 28]. I have hands-on experience taking systems from
+            simulation to real-world deployment, including creating custom GUI tools [cite: 16] and integrating hardware.
+        </p>
+    </section>
+
+    <section id="skills" class="content-section">
+        <h2>My Tech Stack</h2>
+        <div class="skills-grid">
+            <span class="skill-tag">ROS 2 (Humble)</span>
+            <span class="skill-tag">ROS 1</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Gazebo</span>
+            <span class="skill-tag">MoveIt 2</span>
+            <span class="skill-tag">URDF</span>
+            <span class="skill-tag">RViz</span>
+            <span class="skill-tag">OpenCV</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Qt (for GUI)</span>
+            <span class="skill-tag">MATLAB/Simulink</span>
+            <span class="skill-tag">Shell Script</span>
+        </div>
+    </section>
+
+    <section id="contact" class="content-section">
+        <h2>Get In Touch</h2>
+        <div class="contact-links">
+            <a href="mailto:syedazif321@gmail.com" class="contact-icon" title="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/Mohammed-azif-s" target="_blank" class="contact-icon" title="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/syedazif321" target="_blank" class="contact-icon" title="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        </div>
+    </section>
+
+    <script src="script.js"></script> </body>
 </html>

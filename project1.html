@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Pick-O-Place Sort</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css">
+</head>
+<body>
+    <canvas id="fluid-canvas"></canvas>
+
+    <main class="portfolio-container page-container">
+
+        <a href="projects.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Projects
+        </a>
+
+        <div class="project-detail-container">
+            <h2>Pick-O-Place Sort (Parol6)</h2>
+
+            <div class="slider-container" id="project-slider">
+                <div class="slider">
+                    <div class="slide">
+                        <img src="media/project1/gui_operations.gif" alt="GUI Operations">
+                    </div>
+                    <div class="slide">
+                        <img src="media/project1/box_spawning.gif" alt="Box Spawning">
+                    </div>
+                    <div class="slide">
+                        <img src="media/project1/gui1.png" alt="Pick-O-Place GUI 1" class="img-contain">
+                    </div>
+                    <div class="slide">
+                        <img src="media/project1/gui2.png" alt="Pick-O-Place GUI 2" class="img-contain">
+                    </div>
+                    <div class="slide">
+                        <img src="media/project1/Data_base.png" alt="Database Schema">
+                    </div>
+                </div>
+                
+                <button class="slider-arrow prev" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-arrow next" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+                
+                <div class="dots-container" id="dotsContainer"></div>
+            </div>
+            <div class="project-tags">
+                <span>ROS 2 (Humble)</span>
+                <span>C++</span>
+                <span>Gazebo Plugins</span>
+                <span>MoveIt 2</span>
+                <span>GUI</span>
+                <span>Database</span>
+                <span>Docker</span>
+            </div>
+            
+            <h3>Project Overview</h3>
+            <p class="project-full-description">
+                This project involved building a complete, end-to-end sorting solution from the ground up, all in C++ within the ROS 2 and Gazebo ecosystems. The objective was to simulate a Parol6 robotic arm performing an automated pick-and-place operation, sorting boxes from an input conveyor onto two output conveyors based on visual classification.
+            </p>
+
+            <h3>Key Features & Technical Deep Dive</h3>
+            <p class="project-full-description">
+                <ul>
+                    <li><strong>Custom C++ Gazebo Plugins:</strong> I developed several C++ plugins to create a dynamic, realistic simulation. This included an input conveyor plugin for continuous motion and a box-spawning plugin to generate objects with random sizes, colors, and orientations. I also wrote a plugin for the output conveyors that would activate upon box placement.</li>
+                    <li><strong>Intelligent Gripper Logic:</strong> I implemented a suction gripper plugin that included a proximity check. This was crucial for reliability, as the suction would only activate if the end-effector was within an acceptable distance from the box surface, preventing failed pick attempts.</li>
+                    <li><strong>Full-Stack GUI Control:</strong> A significant component was the custom-built GUI. It provided comprehensive real-time control, including joint-level manipulation, Cartesian pose-based control, and incremental jog controls. It also featured a speed slider (0.5x to 2x) for all system components and a status display for errors and box counts.</li>
+                    <li><strong>Analytics & Data Logging:</strong> To analyze performance, I integrated a database (SQLite/PostgreSQL) to log critical analytics. This included simulation start time, detected box color/size, and high-precision timestamps for detection, pick, and place events, allowing for a full-cycle duration analysis.</li>
+                </ul>
+            </p>
+
+            <a href="https://github.com/syedazif321/parol6" class="btn-github" target="_blank">View on GitHub</a>
+        </div>
+    </main>
+
+    <div id="imageModal" class="modal-overlay">
+        <span id="modalClose" class="modal-close">&times;</span>
+        <img id="modalImage" class="modal-content" src="">
+    </div>
+
+    <script src="https://unpkg.com/panzoom@9.4.3/dist/panzoom.min.js"></script>
+
+    <script src="script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Slider Variables ---
+            const sliderContainer = document.getElementById('project-slider');
+            const slider = sliderContainer.querySelector('.slider');
+            const slides = sliderContainer.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dotsContainer = document.getElementById('dotsContainer');
+            
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            let autoPlayInterval;
+
+            // --- Modal/Lightbox Variables ---
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalClose = document.getElementById('modalClose');
+
+            // Variable to hold the zoom instance
+            let currentPanzoomInstance = null; 
+
+            if (slideCount === 0) return; // Don't run if no slides
+
+            // ===========================
+            // SLIDER FUNCTIONS
+            // ===========================
+
+            // 1. Create Dots
+            function createDots() {
+                for (let i = 0; i < slideCount; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    dot.dataset.index = i;
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            // 2. Update Slider Position and Dots
+            function goToSlide(index) {
+                if (index < 0) {
+                    currentIndex = slideCount - 1;
+                } else if (index >= slideCount) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex = index;
+                }
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                const dots = dotsContainer.querySelectorAll('.dot');
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentIndex].classList.add('active');
+            }
+
+            // 3. Navigation Functions
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            function prevSlide() { goToSlide(currentIndex - 1); }
+
+            // 4. Autoplay
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(nextSlide, 5000); // 5 seconds
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            }
+
+            // 5. Slider Event Listeners
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoPlay();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoPlay();
+            });
+
+            dotsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('dot')) {
+                    const index = parseInt(e.target.dataset.index, 10);
+                    goToSlide(index);
+                    resetAutoPlay();
+                }
+            });
+
+            sliderContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            sliderContainer.addEventListener('mouseleave', startAutoPlay);
+
+            // ===========================
+            // LIGHTBOX/MODAL FUNCTIONS
+            // ===========================
+
+            // 1. Open Modal
+            function openModal(e) {
+                const imgSource = e.currentTarget.querySelector('img').src;
+                modalImg.src = imgSource;
+                modal.style.display = "flex";
+                clearInterval(autoPlayInterval); // Pause slider
+                
+                // Clean up any old zoom instance before creating a new one
+                if (currentPanzoomInstance) {
+                    currentPanzoomInstance.dispose();
+                    currentPanzoomInstance = null;
+                }
+
+                // Initialize panzoom on the image
+                currentPanzoomInstance = panzoom(modalImg, {
+                    maxScale: 5,        // Max zoom 5x
+                    minScale: 1,        // Min zoom 100%
+                    contain: 'outside'  // Keep image centered
+                });
+                modalImg.classList.add('zoomable');
+            }
+
+            // 2. Close Modal
+            function closeModal() {
+                modal.style.display = "none";
+                modalImg.src = ""; // Clear src
+                startAutoPlay(); // Resume slider
+
+                // Clean up the zoom instance when closing
+                if (currentPanzoomInstance) {
+                    currentPanzoomInstance.dispose();
+                    currentPanzoomInstance = null;
+                }
+                modalImg.classList.remove('zoomable');
+            }
+
+            // 3. Modal Event Listeners
+            slides.forEach(slide => {
+                slide.addEventListener('click', openModal);
+                slide.style.cursor = 'pointer'; // Show it's clickable
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                // Close if user clicks on the dark overlay (but not the image itself)
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // ===========================
+            // INITIALIZATION
+            // ===========================
+            createDots();
+            goToSlide(0); // Set initial slide
+            startAutoPlay();
+        });
+    </script>
+    </body>
+</html>
