@@ -1,4 +1,7 @@
 /* Basic setup */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
 body, html {
     margin: 0;
     padding: 0;
@@ -513,3 +516,56 @@ END SLIDER STYLES
     color: #bbb;
     text-decoration: none;
 }
+
+/* --- 2. Add these styles at the very bottom --- */
+
+/* Base font styles for the whole site */
+body {
+  font-family: 'Inter', sans-serif;
+  color: #111827; /* Dark gray for text, easier to read than pure black */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased; /* Makes font look smoother */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Style the main header H1 ("Hey, I'm Mohammed Azif") */
+header h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700; /* Bold */
+  letter-spacing: -1px; /* Tightens up the letters a bit */
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+/* Style the main header H2 ("Robotics Engineer") */
+header h2 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500; /* Medium weight, not as heavy as the h1 */
+  color: #4B5563; /* A lighter gray for the subtitle */
+  margin-top: 0;
+}
+
+/* Style the section headers ("About Me", "My Tech Stack", "Get In Touch") */
+.content-section h2 {
+  font-size: 2rem; /* 32px */
+  font-weight: 700; /* Bold */
+  letter-spacing: -0.5px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #E5E7EB; /* Adds a nice underline separator */
+}
+
+
+p {
+  font-size: 1rem; /* 16px */
+  font-weight: 400; /* Regular weight */
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+/* Style for the skill tags */
+.skill-tag {
+  font-weight: 500; /* Medium weight */
+  font-size: 0.875rem; /* 14px */
+}
+
