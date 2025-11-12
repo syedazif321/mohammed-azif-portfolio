@@ -1,4 +1,4 @@
-// src/App.js
+// src/App.js (NO CHANGES REQUIRED)
 
 // 1. We change 'BrowserRouter' to 'HashRouter' and give it an alias 'Router'
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';

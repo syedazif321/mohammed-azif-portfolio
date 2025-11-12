@@ -1,47 +1,12 @@
+// src/components/HomePage.js (Updated)
 import React from 'react';
-import { Link } from 'react-router-dom'; // Use Link for internal pages
-
-// This variable automatically gets the correct path (e.g., "/" or "/mohammed-azif-portfolio")
-const publicUrl = process.env.PUBLIC_URL;
+import Header from './Header'; // Import the new Header component
 
 const HomePage = () => {
   return (
     <main className="portfolio-container" id="home">
-      {/* Paths are from the 'public' folder */}
-      {/* Corrected path for avatar */}
-      <img src={publicUrl + "/media/azif.png"} alt="My Avatar" className="avatar" />
-
-      <header>
-        <h1>Hey, I'm Mohammed Azif👋</h1>
-        <h2>Robotics Engineer</h2>
-      </header>
-
-      <nav>
-        {/* Use <a> for anchor links on the same page */}
-        <a href="#me">
-          <i className="fa-solid fa-user"></i>
-          <span>About Me</span>
-        </a>
-        {/* Use <Link> to go to a different page */}
-        <Link to="/projects">
-          <i className="fa-solid fa-briefcase"></i>
-          <span>Projects</span>
-        </Link>
-        <a href="#skills">
-          <i className="fa-solid fa-laptop-code"></i>
-          <span>Skills</span>
-        </a>
-        <a href="#contact">
-          <i className="fa-solid fa-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </nav>
-
-      {/* Corrected path for resume */}
-      <a href={publicUrl + "/Mohammed_azif_resume_.pdf"} className="btn-resume" download>
-        <i className="fa-solid fa-download"></i>
-        Download Resume
-      </a>
+      {/* 1. Use the reusable Header component */}
+      <Header />
 
       {/* Your sections from index.html, no changes needed */}
       <section id="me" className="content-section">
