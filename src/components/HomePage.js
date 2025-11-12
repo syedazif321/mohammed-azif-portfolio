@@ -29,6 +29,7 @@ const HomePage = () => {
             <span className="skill-tag">Gazebo</span>
             <span className="skill-tag">MoveIt 2</span>
             <span className="skill-tag">URDF</span>
+            <span className="skill-tag">Nav2</span>
             <span className="skill-tag">RViz</span>
             <span className="skill-tag">OpenCV</span>
             <span className="skill-tag">Docker</span>
@@ -37,6 +38,7 @@ const HomePage = () => {
             <span className="skill-tag">Qt (for GUI)</span>
             <span className="skill-tag">MATLAB/Simulink</span>
             <span className="skill-tag">Shell Script</span>
+            <span className="skill-tag">React</span>
         </div>
       </section>
 

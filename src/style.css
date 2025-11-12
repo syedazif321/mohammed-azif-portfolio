@@ -6,7 +6,8 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Switched to Inter for consistency, but kept fallbacks */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: #333;
     /* CRUCIAL FIX: Prevents any content from causing horizontal scroll */
     overflow-x: hidden; 
@@ -21,7 +22,10 @@ body, html {
     height: 100%;
     z-index: -1;
     background-color: #ffffff;
+    /* *** CRITICAL FIX: Stops the browser from treating touch events on the canvas as scrolling *** */
+    touch-action: none; 
 }
+
 
 /* Main Content Container */
 .portfolio-container {
@@ -34,6 +38,9 @@ body, html {
     box-sizing: border-box;
     text-align: center;
     animation: fadeIn 1s ease-in-out;
+    /* FIX: Ensure the main container itself does not exceed the width */
+    width: 100%; 
+    overflow-x: hidden; 
 }
 
 @keyframes fadeIn {
@@ -144,6 +151,7 @@ nav a:hover i {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     text-align: left;
     animation: fadeIn 1s ease-in-out;
+    box-sizing: border-box; /* ADDED: Ensures padding doesn't widen the element */
 }
 
 .content-section h2 {
@@ -205,6 +213,9 @@ PROJECTS PAGE STYLES
     min-height: 100vh;
     height: auto; 
     overflow-y: auto;
+    /* FIX: Ensure container on project page is fully contained */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .back-link {
@@ -582,13 +593,25 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
     .portfolio-container {
         padding: 10px;
     }
+    
+    /* FIX 1: Ensure the Content Container is correctly constrained */
+    .content-section {
+        /* Overriding the 90% width to ensure it never causes overflow */
+        width: calc(100% - 20px); 
+        max-width: 100%;
+        margin: 20px 10px; /* Use smaller margin to keep centered but tight */
+        padding: 20px;
+        box-sizing: border-box; /* Crucial for including padding in the width */
+    }
 
-    /* === FIX 1: Ensure the Header Container never extends past the screen === */
+
+    /* === FIX 2: Ensure the Header Container never extends past the screen === */
+    /* Assuming header-container is a parent of h1/h2 */
     .header-container {
-        width: 100%; /* Forces 100% width */
+        width: 100%; 
         max-width: 100%;
         padding-top: 20px;
-        box-sizing: border-box; /* IMPORTANT for containment */
+        box-sizing: border-box; 
     }
 
     header h1 {
@@ -600,24 +623,33 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
         margin-bottom: 20px;
     }
     
-    /* === FIX 2: Ensure the Navigation's horizontal scroll is contained === */
+    /* === FIX 3 (Original FIX 2): Ensure the Navigation's horizontal scroll is contained === */
     nav {
+        /* Changed from justify-content: flex-start to prevent scrolling */
+        justify-content: center; 
+        /* Removed overflow-x: auto unless horizontal scrolling is desired */
+        /* If horizontal scrolling is required, use the original block, but ensure parent is constrained. */
+        
+        /* IF you want horizontal scrolling for the nav:
         overflow-x: auto;
         white-space: nowrap;
         justify-content: flex-start;
         padding-bottom: 10px;
-        margin-bottom: 20px;
-        
-        width: 100%; /* Forces 100% width */
-        box-sizing: border-box; /* IMPORTANT for containment */
-        padding-left: 10px;    /* Added padding for visual space in scroll view */
-        padding-right: 10px;   /* Added padding for visual space in scroll view */
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 10px; 
+        padding-right: 10px; 
+        */
+
+        /* Keeping as a standard wrap for safer default */
+        flex-wrap: wrap; 
+        gap: 15px; /* Slightly tighter gap */
     }
     
     nav a {
-        display: inline-flex; 
+        /* display: inline-flex;  - not needed if flex-wrap is used */
         flex-direction: column;
-        width: 60px;
+        width: 65px; /* Adjusted size */
         flex-shrink: 0; 
     }
 
@@ -639,12 +671,6 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
     }
 
     /* Content Sections */
-    .content-section {
-        width: 100%;
-        margin: 20px auto;
-        padding: 20px;
-    }
-
     .content-section h2 {
         font-size: 1.5rem;
     }
@@ -662,21 +688,23 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
         grid-template-columns: 1fr;
         width: 100%;
         padding: 0 10px;
+        box-sizing: border-box;
     }
 
     /* Project Detail Page */
     .project-detail-container {
-        width: 100%;
+        width: calc(100% - 20px); /* Tighter constraint */
         padding: 15px;
         margin-bottom: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     
     .slider-container {
         height: 300px;
     }
 
-    /* Fluid Sim Fixes (No changes needed, the canvas is already fixed) */
-    #fluid-canvas {
-        z-index: -1; 
+    .back-link {
+        margin-left: 10px; /* Aligns back link */
     }
 }

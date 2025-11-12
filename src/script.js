@@ -4,35 +4,7 @@ export function initFluid() {
 
     'use strict';
 
-    // Mobile promo section
-
-    // const promoPopup = document.getElementsByClassName('promo')[0];
-    // const promoPopupClose = document.getElementsByClassName('promo-close')[0];
-
-    // if (isMobile()) {
-    //     setTimeout(() => {
-    //         promoPopup.style.display = 'table';
-    //     }, 20000);
-    // }
-
-    // promoPopupClose.addEventListener('click', e => {
-    //     promoPopup.style.display = 'none';
-    // });
-
-    // const appleLink = document.getElementById('apple_link');
-    // appleLink.addEventListener('click', e => {
-    //     ga('send', 'event', 'link promo', 'app');
-    //     window.open('https://apps.apple.com/us/app/fluid-simulation/id1443124993');
-    // });
-
-    // const googleLink = document.getElementById('google_link');
-    // googleLink.addEventListener('click', e => {
-    //     ga('send', 'event', 'link promo', 'app');
-    //     window.open('https://play.google.com/store/apps/details?id=games.paveldogreat.fluidsimfree');
-    // });
-
     // Simulation section
-
 
     const publicUrl = process.env.PUBLIC_URL;
     const texturePath = publicUrl + '/media/LDR_LLL1_0.png';
@@ -50,6 +22,8 @@ export function initFluid() {
         CURL: 40,
         SPLAT_RADIUS: 0.012,
         SPLAT_FORCE: 6000,
+        // TOUCH_FORCE_MULTIPLIER increased slightly for better mobile feel
+        TOUCH_FORCE_MULTIPLIER: 2.0, 
         SHADING: true,
         COLORFUL: true,
         COLOR_UPDATE_SPEED: 10,
@@ -82,12 +56,15 @@ export function initFluid() {
 
     let pointers = [];
     let splatStack = [];
-    pointers.push(new pointerPrototype());
+    pointers.push(new pointerPrototype()); // Desktop pointer at index 0 (id: -1)
 
     const { gl, ext } = getWebGLContext(canvas);
 
     if (isMobile()) {
         config.DYE_RESOLUTION = 512;
+        // MOBILE OPTIMIZATION: Slightly lower dissipation (friction)
+        config.DENSITY_DISSIPATION = 0.40;
+        config.VELOCITY_DISSIPATION = 0.05;
     }
     if (!ext.supportLinearFiltering) {
         config.DYE_RESOLUTION = 512;
@@ -95,8 +72,6 @@ export function initFluid() {
         config.BLOOM = false;
         config.SUNRAYS = false;
     }
-
-    // startGUI();
 
     function getWebGLContext (canvas) {
         const params = { alpha: true, depth: false, stencil: false, antialias: false, preserveDrawingBuffer: false };
@@ -135,8 +110,6 @@ export function initFluid() {
             formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
             formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
         }
-
-        // ga('send', 'event', isWebGL2 ? 'webgl2' : 'webgl', formatRGBA == null ? 'not supported' : 'supported');
 
         return {
             gl,
@@ -187,81 +160,6 @@ export function initFluid() {
         let status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
         return status == gl.FRAMEBUFFER_COMPLETE;
     }
-
-    // function startGUI () {
-    //     var gui = new dat.GUI({ width: 300 });
-    //     gui.add(config, 'DYE_RESOLUTION', { 'high': 1024, 'medium': 512, 'low': 256, 'very low': 128 }).name('quality').onFinishChange(initFramebuffers);
-    //     gui.add(config, 'SIM_RESOLUTION', { '32': 32, '64': 64, '128': 128, '256': 256 }).name('sim resolution').onFinishChange(initFramebuffers);
-    //     gui.add(config, 'DENSITY_DISSIPATION', 0, 4.0).name('density diffusion');
-    //     gui.add(config, 'VELOCITY_DISSIPATION', 0, 4.0).name('velocity diffusion');
-    //     gui.add(config, 'PRESSURE', 0.0, 1.0).name('pressure');
-    //     gui.add(config, 'CURL', 0, 50).name('vorticity').step(1);
-    //     gui.add(config, 'SPLAT_RADIUS', 0.01, 1.0).name('splat radius');
-    //     gui.add(config, 'SHADING').name('shading').onFinishChange(updateKeywords);
-    //     gui.add(config, 'COLORFUL').name('colorful');
-    //     gui.add(config, 'PAUSED').name('paused').listen();
-
-    //     gui.add({ fun: () => {
-    //         splatStack.push(parseInt(Math.random() * 20) + 5);
-    //     } }, 'fun').name('Random splats');
-
-    //     let bloomFolder = gui.addFolder('Bloom');
-    //     bloomFolder.add(config, 'BLOOM').name('enabled').onFinishChange(updateKeywords);
-    //     bloomFolder.add(config, 'BLOOM_INTENSITY', 0.1, 2.0).name('intensity');
-    //     bloomFolder.add(config, 'BLOOM_THRESHOLD', 0.0, 1.0).name('threshold');
-
-    //     let sunraysFolder = gui.addFolder('Sunrays');
-    //     sunraysFolder.add(config, 'SUNRAYS').name('enabled').onFinishChange(updateKeywords);
-    //     sunraysFolder.add(config, 'SUNRAYS_WEIGHT', 0.3, 1.0).name('weight');
-
-    //     let captureFolder = gui.addFolder('Capture');
-    //     captureFolder.addColor(config, 'BACK_COLOR').name('background color');
-    //     captureFolder.add(config, 'TRANSPARENT').name('transparent');
-    //     captureFolder.add({ fun: captureScreenshot }, 'fun').name('take screenshot');
-
-    //     let github = gui.add({ fun : () => {
-    //         window.open('https://github.com/PavelDoGreat/WebGL-Fluid-Simulation');
-    //         ga('send', 'event', 'link button', 'github');
-    //     } }, 'fun').name('Github');
-    //     github.__li.className = 'cr function bigFont';
-    //     github.__li.style.borderLeft = '3px solid #8C8C8C';
-    //     let githubIcon = document.createElement('span');
-    //     github.domElement.parentElement.appendChild(githubIcon);
-    //     githubIcon.className = 'icon github';
-
-    //     let twitter = gui.add({ fun : () => {
-    //         ga('send', 'event', 'link button', 'twitter');
-    //         window.open('https://twitter.com/PavelDoGreat');
-    //     } }, 'fun').name('Twitter');
-    //     twitter.__li.className = 'cr function bigFont';
-    //     twitter.__li.style.borderLeft = '3px solid #8C8C8C';
-    //     let twitterIcon = document.createElement('span');
-    //     twitter.domElement.parentElement.appendChild(twitterIcon);
-    //     twitterIcon.className = 'icon twitter';
-
-    //     let discord = gui.add({ fun : () => {
-    //         ga('send', 'event', 'link button', 'discord');
-    //         window.open('https://discordapp.com/invite/CeqZDDE');
-    //     } }, 'fun').name('Discord');
-    //     discord.__li.className = 'cr function bigFont';
-    //     discord.__li.style.borderLeft = '3px solid #8C8C8C';
-    //     let discordIcon = document.createElement('span');
-    //     discord.domElement.parentElement.appendChild(discordIcon);
-    //     discordIcon.className = 'icon discord';
-
-    //     let app = gui.add({ fun : () => {
-    //         ga('send', 'event', 'link button', 'app');
-    //         window.open('http://onelink.to/5b58bn');
-    //     } }, 'fun').name('Check out mobile app');
-    //     app.__li.className = 'cr function appBigFont';
-    //     app.__li.style.borderLeft = '3px solid #00FF7F';
-    //     let appIcon = document.createElement('span');
-    //     app.domElement.parentElement.appendChild(appIcon);
-    //     appIcon.className = 'icon app';
-
-    //     if (isMobile())
-    //         gui.close();
-    // }
 
     function isMobile () {
         return /Mobi|Android/i.test(navigator.userAgent);
@@ -956,7 +854,7 @@ export function initFluid() {
     const advectionProgram       = new Program(baseVertexShader, advectionShader);
     const divergenceProgram      = new Program(baseVertexShader, divergenceShader);
     const curlProgram            = new Program(baseVertexShader, curlShader);
-    const vorticityProgram       = new Program(baseVertexShader, vorticityShader);
+    const vorticityProgram       = new Program(baseVertexShader, vorticityShader); // Fixed typo from '-' to '='
     const pressureProgram        = new Program(baseVertexShader, pressureShader);
     const gradienSubtractProgram = new Program(baseVertexShader, gradientSubtractShader);
 
@@ -1203,10 +1101,12 @@ export function initFluid() {
         if (splatStack.length > 0)
             multipleSplats(splatStack.pop());
 
+        // This block handles continuous splatting for mousemove (pointers[0])
+        // on desktop. On mobile, splatting is handled immediately in touchmove.
         pointers.forEach(p => {
-            if (p.moved) {
-                p.moved = false;
-                splatPointer(p);
+            if (p.moved && p.id == -1) { 
+                p.moved = false; // Reset the flag
+                splatPointer(p); // Perform the splat
             }
         });
     }
@@ -1401,13 +1301,27 @@ export function initFluid() {
         }
     }
 
+    // UPDATED: Added mobile force multiplier logic and logs
     function splatPointer (pointer) {
         let dx = pointer.deltaX * config.SPLAT_FORCE;
         let dy = pointer.deltaY * config.SPLAT_FORCE;
+
+        // Apply multiplier if it's a touch event (ID is not -1)
+        if (pointer.id !== -1) { 
+            dx *= config.TOUCH_FORCE_MULTIPLIER;
+            dy *= config.TOUCH_FORCE_MULTIPLIER;
+            // Console log for mobile touch
+            console.log(`[splatPointer] TOUCH Boosted. ID: ${pointer.id}, Force: (${dx.toFixed(0)}, ${dy.toFixed(0)})`);
+        } else {
+            // Console log for desktop mouse
+            console.log(`[splatPointer] MOUSE Normal. ID: ${pointer.id}, Force: (${dx.toFixed(0)}, ${dy.toFixed(0)})`);
+        }
+
         splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
     }
 
     function multipleSplats (amount) {
+        console.log(`[multipleSplats] Applying ${amount} random splats.`);
         for (let i = 0; i < amount; i++) {
             const color = generateColor();
             color.r *= 0.15;
@@ -1444,6 +1358,8 @@ export function initFluid() {
         return radius;
     }
 
+    // --- MOUSE LISTENERS (Desktop/Fallback) ---
+
     window.addEventListener('mousedown', e => {
         let posX = scaleByPixelRatio(e.pageX);
         let posY = scaleByPixelRatio(e.pageY);
@@ -1452,7 +1368,7 @@ export function initFluid() {
             pointer = new pointerPrototype();
         updatePointerDownData(pointer, -1, posX, posY);
 
-        // Add this back
+        // Splat on mouse down
         let texcoordX = posX / canvas.width;
         let texcoordY = 1.0 - posY / canvas.height;
         splat(texcoordX, texcoordY, 0, 0, pointer.color);
@@ -1460,46 +1376,98 @@ export function initFluid() {
 
     window.addEventListener('mousemove', e => {
         let pointer = pointers[0];
-        // The "if" statement is gone
         let posX = scaleByPixelRatio(e.pageX);
         let posY = scaleByPixelRatio(e.pageY);
         updatePointerMoveData(pointer, posX, posY);
     });
+    
     window.addEventListener('mouseup', () => {
         updatePointerUpData(pointers[0]);
     });
 
+    // --- TOUCH LISTENERS (Mobile) ---
+
     canvas.addEventListener('touchstart', e => {
-        e.preventDefault();
+        // DEBUG: touchstart event
+        console.log(`[touchstart] Touches detected: ${e.targetTouches.length}`);
+        e.preventDefault(); // IMPORTANT: Prevent default browser behavior (e.g., scrolling/zooming)
         const touches = e.targetTouches;
-        while (touches.length >= pointers.length)
-            pointers.push(new pointerPrototype());
+        
         for (let i = 0; i < touches.length; i++) {
-            let posX = scaleByPixelRatio(touches[i].pageX);
-            let posY = scaleByPixelRatio(touches[i].pageY);
-            updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
+            let touch = touches[i];
+            let pointer = pointers.find(p => p.id === touch.identifier);
+            
+            // If pointer not found by ID, find a free slot (ID -1) or create a new one
+            if (pointer == null) {
+                 pointer = pointers.find(p => p.id === -1) || new pointerPrototype();
+                 if (pointer.id === -1) {
+                     // If we found a free desktop slot, reuse it (should only be needed if desktop mouse isn't used)
+                 } else {
+                     // If all pointers are currently assigned (id > -1), push a new one
+                     pointers.push(pointer);
+                 }
+            }
+            
+            let posX = scaleByPixelRatio(touch.pageX);
+            let posY = scaleByPixelRatio(touch.pageY);
+            
+            // Re-use updatePointerDownData, passing the touch identifier
+            updatePointerDownData(pointer, touch.identifier, posX, posY); 
+            console.log(`[touchstart] Pointer ID: ${pointer.id} assigned to Touch ID: ${touch.identifier}.`);
+
+            // Initial splat (zero force) for instant fluid response on tap/touchdown
+            let texcoordX = posX / canvas.width;
+            let texcoordY = 1.0 - posY / canvas.height;
+            console.log(`[touchstart] Initial splat (zero force) for ID: ${pointer.id}`);
+            splat(texcoordX, texcoordY, 0, 0, pointer.color);
         }
-    });
+        
+        // Ensure enough pointers exist for future multi-touch (this logic is typically handled implicitly by the loop above in robust forks)
+        while (touches.length + 1 >= pointers.length)
+             pointers.push(new pointerPrototype());
+             
+    }, { passive: false }); 
 
     canvas.addEventListener('touchmove', e => {
-        e.preventDefault();
+        e.preventDefault(); 
+        
         const touches = e.targetTouches;
         for (let i = 0; i < touches.length; i++) {
-            let pointer = pointers[i + 1];
-            if (!pointer.down) continue;
+            // CRITICAL: Must find the pointer using the active touch identifier
+            let pointer = pointers.find(p => p.id === touches[i].identifier); 
+            
+            if (pointer == null || !pointer.down) {
+                continue;
+            }
+            
             let posX = scaleByPixelRatio(touches[i].pageX);
             let posY = scaleByPixelRatio(touches[i].pageY);
+            
             updatePointerMoveData(pointer, posX, posY);
-        }
-    }, false);
 
-    window.addEventListener('touchend', e => {
+            // DEBUG LOG
+            console.log(`[touchmove DEBUG] ID: ${pointer.id}, Moved: ${pointer.moved}, Delta: (${pointer.deltaX.toFixed(4)}, ${pointer.deltaY.toFixed(4)})`);
+
+            if (pointer.moved) {
+                // This is where the force is applied immediately for touchmove
+                splatPointer(pointer);
+                pointer.moved = false;
+            }
+        }
+    }, { passive: false });
+    
+    // MOVED: touchend listener is now attached directly to the canvas
+    canvas.addEventListener('touchend', e => { 
         const touches = e.changedTouches;
         for (let i = 0; i < touches.length; i++)
         {
-            let pointer = pointers.find(p => p.id == touches[i].identifier);
+            // CRITICAL: Must find the pointer using the finished touch identifier
+            let pointer = pointers.find(p => p.id === touches[i].identifier);
             if (pointer == null) continue;
+            console.log(`[touchend] Pointer ID: ${pointer.id} lift.`);
             updatePointerUpData(pointer);
+            // Reset ID to -1 so this slot can be reused by a new touch or the desktop mouse
+            pointer.id = -1; 
         }
     });
 
@@ -1530,7 +1498,10 @@ export function initFluid() {
         pointer.texcoordY = 1.0 - posY / canvas.height;
         pointer.deltaX = correctDeltaX(pointer.texcoordX - pointer.prevTexcoordX);
         pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
-        pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
+        
+        // FIX: Lowered the threshold for higher mobile sensitivity
+        const MOVE_THRESHOLD = 0.00001; 
+        pointer.moved = Math.abs(pointer.deltaX) > MOVE_THRESHOLD || Math.abs(pointer.deltaY) > MOVE_THRESHOLD;
     }
 
     function updatePointerUpData (pointer) {
