@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/mohammed-azif-portfolio/static/css/main.f4b7554f.css",
+    "main.css": "/mohammed-azif-portfolio/static/css/main.3243a7dd.css",
     "main.js": "/mohammed-azif-portfolio/static/js/main.03db3098.js",
     "index.html": "/mohammed-azif-portfolio/index.html"
   },
   "entrypoints": [
-    "static/css/main.f4b7554f.css",
+    "static/css/main.3243a7dd.css",
     "static/js/main.03db3098.js"
   ]
 }
