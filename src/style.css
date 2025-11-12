@@ -525,7 +525,7 @@ END SLIDER STYLES
 }
 
 .modal-close:hover,
-.modal-close:focus {
+modal-close:focus {
     color: #bbb;
     text-decoration: none;
 }
@@ -628,19 +628,7 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
         /* Changed from justify-content: flex-start to prevent scrolling */
         justify-content: center; 
         /* Removed overflow-x: auto unless horizontal scrolling is desired */
-        /* If horizontal scrolling is required, use the original block, but ensure parent is constrained. */
         
-        /* IF you want horizontal scrolling for the nav:
-        overflow-x: auto;
-        white-space: nowrap;
-        justify-content: flex-start;
-        padding-bottom: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        padding-left: 10px; 
-        padding-right: 10px; 
-        */
-
         /* Keeping as a standard wrap for safer default */
         flex-wrap: wrap; 
         gap: 15px; /* Slightly tighter gap */
@@ -707,4 +695,66 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
     .back-link {
         margin-left: 10px; /* Aligns back link */
     }
+}
+
+/*
+=================================
+AI Agent Prompt (Aesthetic Section)
+=================================
+*/
+
+/* The container for the prompt, making it a flexible row */
+.interactive-prompt {
+    /* Use flexbox to align the text and arrow horizontally */
+    display: flex; 
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Push text to left, arrow to right */
+
+    /* Aesthetic Box Styling - Frosted Glass Effect */
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* CRITICAL: Adds the modern frosted glass effect */
+    border-radius: 20px; /* Rounded corners */
+    padding: 15px 25px;
+    margin-bottom: 25px; /* Space below the prompt box */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    
+    /* Positioning */
+    z-index: 5;
+    position: relative;
+    max-width: 90%; 
+    width: 300px; /* Fixed width, like the mobile card in the video */
+    /* Center the box horizontally on the page */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* The "Ask me anything..." text style */
+.ai-prompt-text {
+    font-size: 1.1em;
+    font-weight: 500; /* Medium weight */
+    color: #333; /* Darker text for readability on light background */
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* The Arrow Icon Styling */
+.ai-prompt-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Circle background for the arrow */
+    background-color: #007aff; /* Use primary blue color */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-size: 0.9em;
+    cursor: pointer; /* Suggests it's clickable */
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover/Active effects to encourage clicks */
+.ai-prompt-arrow:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
