@@ -57,6 +57,13 @@ body, html {
     margin-bottom: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer; 
+    /* Avatar Hover Effect (Existing professional style) */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.avatar:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) rotateX(2deg); 
 }
 
 /* Header Text */
@@ -104,17 +111,22 @@ nav a i {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    /* Transition for magnification effect */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 nav a:hover {
     color: #007aff;
 }
 
+/* === ENHANCEMENT: NAVIGATION ICON MAGNIFICATION (Dock Effect) === */
 nav a:hover i {
     background-color: #e0e8ff;
     color: #007aff;
+    transform: scale(1.3) translateY(-8px); /* Scale up and lift */
+    box-shadow: 0 10px 20px rgba(0, 122, 255, 0.25); /* Stronger shadow for depth */
 }
+
 
 /* Download Resume Button */
 .btn-resume {
@@ -126,7 +138,8 @@ nav a:hover i {
     font-weight: 500;
     font-size: 1rem;
     margin-top: 10px;
-    transition: all 0.2s ease;
+    /* Transition for button lift effect */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
 }
 
@@ -135,8 +148,8 @@ nav a:hover i {
 }
 
 .btn-resume:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+    transform: translateY(-4px); /* Increased lift */
+    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4); /* Stronger shadow */
 }
 
 /* Content Sections (About, Skills, Contact) */
@@ -181,6 +194,15 @@ nav a:hover i {
     font-weight: 500;
     padding: 8px 15px;
     border-radius: 50px;
+    /* Transition for subtle magnification */
+    transition: all 0.3s ease; 
+}
+
+/* === ENHANCEMENT: SKILL TAG LIFT EFFECT === */
+.skill-tag:hover {
+    transform: scale(1.05) translateY(-2px); /* Slight scale and lift */
+    background-color: #d8e2ff;
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
 }
 
 /* Contact Links */
@@ -193,12 +215,15 @@ nav a:hover i {
 .contact-icon {
     font-size: 2.5rem;
     color: #555;
-    transition: color 0.2s ease, transform 0.2s ease;
+    /* Transition for magnification effect */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* === ENHANCEMENT: CONTACT ICON MAGNIFICATION === */
 .contact-icon:hover {
     color: #007aff;
-    transform: scale(1.1);
+    transform: scale(1.3) translateY(-2px); /* Pronounced scale and slight lift */
+    text-shadow: 0 5px 15px rgba(0, 122, 255, 0.4); /* Depth shadow */
 }
 
 /*
@@ -247,14 +272,15 @@ PROJECTS PAGE STYLES
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     text-align: left;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Transition for project card lift effect */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column; 
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px); /* Stronger lift on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow */
 }
 
 .project-card-image {
@@ -321,13 +347,14 @@ PROJECTS PAGE STYLES
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.2s ease;
+    /* Transition for button lift effect */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
 }
 
 .btn-details:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.3);
+    transform: translateY(-4px); /* Increased lift */
+    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.4); /* Stronger shadow */
 }
 
 /*
@@ -393,11 +420,12 @@ NEW SLIDER STYLES
     height: 40px;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .slider-arrow:hover {
     background-color: rgba(0, 0, 0, 0.6);
+    transform: translateY(-50%) scale(1.1); /* Subtle arrow pop */
 }
 
 .slider-arrow.prev {
@@ -430,11 +458,12 @@ NEW SLIDER STYLES
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.dot.active {
+.dot.active, .dot:hover {
     background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.2); /* Subtle dot pop */
 }
 
 /*
@@ -647,6 +676,11 @@ MOBILE RESPONSIVENESS (Max Width: 768px)
         width: 25px;
         height: 25px;
     }
+
+    /* Adjust dock effect for mobile to be less extreme */
+    nav a:hover i {
+        transform: scale(1.2) translateY(-6px);
+    }
     
     .avatar {
         width: 100px;
@@ -726,7 +760,15 @@ AI Agent Prompt (Aesthetic Section)
     /* Center the box horizontally on the page */
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer; /* Ensure the box itself suggests interactivity */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+.interactive-prompt:hover {
+    transform: translateY(-4px); /* Lift the prompt box */
+    box-shadow: 0 10px 20px rgba(0, 122, 255, 0.2); /* Subtle blue glow */
+}
+
 
 /* The "Ask me anything..." text style */
 .ai-prompt-text {
@@ -750,11 +792,12 @@ AI Agent Prompt (Aesthetic Section)
     color: white;
     font-size: 0.9em;
     cursor: pointer; /* Suggests it's clickable */
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    /* Transition for arrow pop */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Hover/Active effects to encourage clicks */
 .ai-prompt-arrow:hover {
     background-color: #0056b3;
-    transform: scale(1.05);
+    transform: scale(1.15); /* Magnify the arrow circle */
 }
