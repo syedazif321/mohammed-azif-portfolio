@@ -101,7 +101,7 @@ const Header = () => {
           {getNavLink('contact', 'Contact', 'fa-solid fa-envelope')}
         </nav>
 
-        <a href={publicUrl + "/Mohammed_azif_resume_.pdf"} className="btn-resume" download>
+        <a href={publicUrl + "/Mohammed_Azif_resume.pdf"} className="btn-resume" download>
           <i className="fa-solid fa-download"></i>
           Download Resume
         </a>
