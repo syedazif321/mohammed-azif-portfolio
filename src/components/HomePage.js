@@ -64,6 +64,7 @@ const HomePage = () => {
                 <h2>My Tech Stack</h2>
                 <div className="skills-grid">
                     <span className="skill-tag">ROS 2 (Humble)</span>
+                    <span className="skill-tag">Isaac Sim</span>
                     <span className="skill-tag">C++</span>
                     <span className="skill-tag">Python</span>
                     <span className="skill-tag">Gazebo</span>
