@@ -85,7 +85,7 @@ export const projects = [
       "<strong>Custom Flutter App Development:</strong> Built a production-grade APK ('iHub Data Mission Control') using Flutter. The app communicates with the robot via ROSbridge and WebSockets, providing real-time telemetry, manual drive overrides, and safety status monitoring.",
       "<strong>Multilingual AI Voice Control:</strong> Integrated the Gemini 2.5 Flash API for natural language processing, allowing the wheelchair to understand intent-based commands in 5 languages (English, Malayalam, Tamil, Telugu, Hindi). Implemented 'Hey Ducky' wake-word detection using Picovoice.",
       "<strong>Advanced Sensor Fusion & Navigation:</strong> Configured the Nav2 stack with a 2D LiDAR, Ultrasonic sensors, TOF and IMU.",
-      "<strong>Safety-First Architecture:</strong> Developed custom ROS 2 nodes in Python for smooth velocity ramping and emergency stop logic, ensuring passenger comfort and hardware longevity for the 11.1V Li-ion power system."
+      "<strong>Safety-First Architecture:</strong> Developed custom ROS 2 nodes in Python for smooth velocity ramping and emergency stop logic, ensuring passenger comfort and hardware longevity for power system."
     ],
     images: [
       { src: publicUrl + "/media/project4/apk.gif", alt: "Flutter App Interface" },
