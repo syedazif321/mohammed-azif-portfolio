@@ -70,10 +70,30 @@ export const projects = [
       { src: publicUrl + "/media/project3/video2.gif", alt: "Dynamic Pick Demo 2" },
       { src: publicUrl + "/media/project3/2.png", alt: "ArUco Tracking" },
       { src: publicUrl + "/media/project3/3.png", alt: "System View" },
-      // FIXED TYPO: vidoe1.gif -> video1.gif
       { src: publicUrl + "/media/project3/video1.gif", alt: "Dynamic Pick Demo 1" }
     ],
-    // FIXED TYPO: vidoe1.gif -> video1.gif
+
     cardImage: publicUrl + "/media/project3/video1.gif"
+  },
+  {
+    id: "ihub-smart-wheelchair",
+    title: "AI-Powered Autonomous Wheelchair",
+    githubUrl: null, // Private Repository - iHub-Data IIIT Hyderabad
+    tags: ["ROS 2", "Jetson Orin", "Flutter", "Gemini 2.5 Flash", "Nav2", "LiDAR"],
+    overview: "A high-impact R&D project at iHub-Data, IIIT Hyderabad, focused on creating an intelligent mobility solution. I developed a custom mobile application from scratch and integrated a robust ROS 2 navigation stack on a Jetson Orin to handle complex indoor environments.",
+    features: [
+      "<strong>Custom Flutter App Development:</strong> Built a production-grade APK ('iHub Data Mission Control') using Flutter. The app communicates with the robot via ROSbridge and WebSockets, providing real-time telemetry, manual drive overrides, and safety status monitoring.",
+      "<strong>Multilingual AI Voice Control:</strong> Integrated the Gemini 2.5 Flash API for natural language processing, allowing the wheelchair to understand intent-based commands in 5 languages (English, Malayalam, Tamil, Telugu, Hindi). Implemented 'Hey Ducky' wake-word detection using Picovoice.",
+      "<strong>Advanced Sensor Fusion & Navigation:</strong> Configured the Nav2 stack with a 2D LiDAR, Ultrasonic sensors, TOF and IMU.",
+      "<strong>Safety-First Architecture:</strong> Developed custom ROS 2 nodes in Python for smooth velocity ramping and emergency stop logic, ensuring passenger comfort and hardware longevity for the 11.1V Li-ion power system."
+    ],
+    images: [
+      { src: publicUrl + "/media/project4/apk.gif", alt: "Flutter App Interface" },
+      { src: publicUrl + "/media/project4/PXL_20260315_075130969.jpg", alt: "Hardware Setup" },
+      { src: publicUrl + "/media/project4/wheelchair_nav.gif", alt: "LiDAR Navigation Demo" },
+      
+      { src: publicUrl + "/media/project4/poster.png", alt: "Project Poster" }
+    ],
+    cardImage: publicUrl + "/media/project4/wheelchair_main.gif" 
   }
 ];
