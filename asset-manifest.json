@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/mohammed-azif-portfolio/static/css/main.62ffe8f8.css",
-    "main.js": "/mohammed-azif-portfolio/static/js/main.db4598da.js",
+    "main.css": "/mohammed-azif-portfolio/static/css/main.c5e8f579.css",
+    "main.js": "/mohammed-azif-portfolio/static/js/main.dcfb5e99.js",
     "index.html": "/mohammed-azif-portfolio/index.html"
   },
   "entrypoints": [
-    "static/css/main.62ffe8f8.css",
-    "static/js/main.db4598da.js"
+    "static/css/main.c5e8f579.css",
+    "static/js/main.dcfb5e99.js"
   ]
 }
